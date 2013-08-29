@@ -1,0 +1,5 @@
+
+# attempt.to.re-initialise.storage.on.client.connections.diff [git sha:238dbbcaa568ee13c4e3175c98fb8d5a6a2ad3bd | unsubmitted]
+-when storage is not yet in a 'configured' state, attempt to re-
+initialise prior to replying to client connections
+-allows storage to come online after quasselcore start up

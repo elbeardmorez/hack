@@ -1,0 +1,48 @@
+From 2ccfc0ebce2a4a38a9b16b5ca351cad3eaaeb768 Mon Sep 17 00:00:00 2001
+From: Pete Beardmore <pete.beardmore@msn.com>
+Date: Thu, 29 Aug 2013 09:09:57 +0100
+Subject: attempt to re-initialise storage on client connections
+
+-when storage is not yet in a 'configured' state, attempt to re-
+initialise prior to replying to client connections
+-allows storage to come online after quasselcore start up
+---
+ src/core/core.cpp | 14 ++++++++++----
+ 1 file changed, 10 insertions(+), 4 deletions(-)
+
+diff --git a/src/core/core.cpp b/src/core/core.cpp
+index 4413211..0776002 100644
+--- a/src/core/core.cpp
++++ b/src/core/core.cpp
+@@ -607,8 +607,17 @@ void Core::processClientMessage(const QVariant &data)
+ 
+         reply["LoginEnabled"] = true;
+ 
+-        // check if we are configured, start wizard otherwise
++        // storage setup
+         if (!_configured) {
++            // re-check availability
++            CoreSettings cs;
++            _configured = initStorage(cs.storageSettings().toMap());
++        }
++        if (_configured) {
++            reply["Configured"] = true;
++        }
++        else {
++            // start wizards
+             reply["Configured"] = false;
+             QList<QVariant> backends;
+             foreach(Storage *backend, _storageBackends.values()) {
+@@ -622,9 +631,6 @@ void Core::processClientMessage(const QVariant &data)
+             reply["StorageBackends"] = backends;
+             reply["LoginEnabled"] = false;
+         }
+-        else {
+-            reply["Configured"] = true;
+-        }
+         clientInfo[peer] = msg; // store for future reference
+         reply["MsgType"] = "ClientInitAck";
+         peer->writeSocketData(reply);
+-- 
+1.8.4
+

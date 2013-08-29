@@ -7,3 +7,6 @@ a dumping ground for patches which are not intended for submission anywhere
 ### horde
 -restore.settings.text.and.arrow.to.top.bar.diff [git sha:15ce290db754182af9d7c1a82b07c8b676191cd5 | unsubmitted]
 
+### quassel
+-attempt.to.re-initialise.storage.on.client.connections.diff [git sha:238dbbcaa568ee13c4e3175c98fb8d5a6a2ad3bd | unsubmitted]
+
