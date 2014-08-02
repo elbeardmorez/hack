@@ -1,0 +1,52 @@
+From 659ac9ccd7a9f9f30092bf4430acc26e141f664e Mon Sep 17 00:00:00 2001
+From: Pete Beardmore <pete.beardmore@msn.com>
+Date: Sat, 2 Aug 2014 18:38:18 +0100
+Subject: restore 'Settings' text and arrow to top bar
+
+---
+ framework/Core/lib/Horde/Core/Topbar.php | 5 ++---
+ horde/themes/default/screen.css          | 3 +--
+ 2 files changed, 3 insertions(+), 5 deletions(-)
+
+diff --git a/framework/Core/lib/Horde/Core/Topbar.php b/framework/Core/lib/Horde/Core/Topbar.php
+index 086270e..1631b99 100644
+--- a/framework/Core/lib/Horde/Core/Topbar.php
++++ b/framework/Core/lib/Horde/Core/Topbar.php
+@@ -127,9 +127,8 @@ class Horde_Core_Topbar
+         }
+ 
+         $menu['settings'] = array(
+-            'class' => 'horde-settings horde-icon-settings',
+-            'name' => '',
+-            'noarrow' => true,
++            'class' => 'horde-settings horde-icon-settings horde-point-center',
++            'name' => Horde_Core_Translation::t("Settings"),
+             'status' => 'active'
+         );
+ 
+diff --git a/horde/themes/default/screen.css b/horde/themes/default/screen.css
+index 9f77879..0b8b779 100644
+--- a/horde/themes/default/screen.css
++++ b/horde/themes/default/screen.css
+@@ -1747,9 +1747,9 @@ left.horde-point-right {
+ }
+ .horde-settings {
+     float: left;
+-    width: 22px;
+     height: 27px;
+     margin: 7px 0 0 0;
++    padding: 2px 0 0 25px;
+ }
+ #horde-search {
+     float: right;
+@@ -1815,7 +1815,6 @@ left.horde-point-right {
+     background-image: url("graphics/settings-active.png");
+ }
+ .horde-icon-settings a {
+-    width: 22px;
+     height: 27px;
+ }
+ 
+-- 
+1.8.4
+
